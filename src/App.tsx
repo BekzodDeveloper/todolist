@@ -22,7 +22,7 @@ function App() {
         let filteredTasks = tasks.filter(task => task.id !== taskId)
         setTasks(filteredTasks)
     }
-    const addNewTask = (title:string) => {
+    const addNewTask = (title: string) => {
         let newTask = {id: v1(), title: title, isDone: false}
         let newTasks = [newTask, ...tasks]
         setTasks(newTasks)
@@ -45,6 +45,15 @@ function App() {
             tasksForDTodoList = tasks;
     }
 
+    const changeTaskStatus = (taskId: string, isDone: boolean) => {
+        let task = tasks.find(t => t.id === taskId);
+        if (task) {
+            task.isDone = isDone;
+            setTasks([...tasks])
+        }
+    }
+
+
     function changeFilter(value: FilterValuesType) {
         setFilter(value)
     }
@@ -57,6 +66,8 @@ function App() {
                 removeTask={removeTask}
                 changeFilter={changeFilter}
                 addNewTask={addNewTask}
+                changeTaskStatus={changeTaskStatus}
+                filter={filter}
             />
         </div>
     );
